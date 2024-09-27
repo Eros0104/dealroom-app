@@ -1,1 +1,2 @@
-export { default as container } from "./container";
+export { default as Container } from "./container";
+export { default as IndustryCard } from "./industry-card";

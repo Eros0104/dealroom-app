@@ -1,9 +1,12 @@
+import { Container, IndustryCard } from "./components";
 import "./index.css";
 
 function App() {
   return (
-    <div>
-      <div>Hello World</div>
+    <div className="bg-gray-100 min-h-lvh">
+      <Container>
+        <IndustryCard title="Lorem Ipsum" />
+      </Container>
     </div>
   );
 }
