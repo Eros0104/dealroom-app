@@ -13,11 +13,6 @@
     "skipLibCheck": true,
     "moduleResolution": "node16",
 
-    "outDir": "dist",
-
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "outDir": "dist"
   }
 }
