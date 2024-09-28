@@ -1,13 +1,25 @@
-import { Container, IndustryCard } from "./components";
+import { useGetCompaniesQuery } from "@/api/companies";
+import { Container, IndustryCard, Providers } from "@/components";
 import "./index.css";
 
-function App() {
+const Home = () => {
+  const { data: companies = [] } = useGetCompaniesQuery();
   return (
     <div className="bg-gray-100 min-h-lvh">
       <Container>
-        <IndustryCard title="Lorem Ipsum" />
+        {companies.map((company) => (
+          <IndustryCard key={company.uuid} title={company.name} />
+        ))}
       </Container>
     </div>
+  );
+};
+
+function App() {
+  return (
+    <Providers>
+      <Home />
+    </Providers>
   );
 }
 
