@@ -1,28 +1,33 @@
 import { useGetCompaniesQuery } from "@/api/companies";
 import { Company } from "@/api/companies/types";
-import { Container, IndustryCard } from "@/components";
+import { Container, IndustryCard, IndustryCardItem } from "@/components";
 import { useMemo } from "react";
 
 const Home = () => {
   const { data: companies = { items: [] } } = useGetCompaniesQuery();
 
-  const companiesGroups = useMemo(
-    () =>
-      companies.items.reduce(
-        (acc, company) => {
-          company.industries.forEach((industry) => {
-            if (!acc[industry.name]) {
-              acc[industry.name] = [];
-            }
-            acc[industry.name].push(company);
-          });
+  const companiesGroups = useMemo(() => {
+    // Remove duplicate companies
+    const filteredDuplicates = companies.items.filter(
+      (company, index, self) =>
+        index === self.findIndex((t) => t.uuid === company.uuid),
+    );
 
-          return acc;
-        },
-        {} as Record<string, Company[]>,
-      ),
-    [companies.items],
-  );
+    // Group companies by industries
+    return filteredDuplicates.reduce(
+      (acc, company) => {
+        company.industries.forEach((industry) => {
+          if (!acc[industry.name]) {
+            acc[industry.name] = [];
+          }
+          acc[industry.name].push(company);
+        });
+
+        return acc;
+      },
+      {} as Record<string, Company[]>,
+    );
+  }, [companies.items]);
 
   return (
     <div
@@ -37,8 +42,17 @@ const Home = () => {
             py-4
           `}
         >
-          {Object.entries(companiesGroups).map(([group]) => (
-            <IndustryCard key={group} title={group} />
+          {Object.entries(companiesGroups).map(([group, companies]) => (
+            <IndustryCard key={group} title={group}>
+              {companies.map((company) => (
+                <IndustryCardItem
+                  key={company.uuid}
+                  name={company.name}
+                  totalJobsAvailable={company.totalJobsAvailable}
+                  imageUrl={""}
+                />
+              ))}
+            </IndustryCard>
           ))}
         </div>
       </Container>

@@ -1,8 +1,9 @@
 interface Props {
   title: string;
+  children?: React.ReactNode;
 }
 
-const IndustryCard = ({ title }: Props) => {
+const IndustryCard = ({ title, children }: Props) => {
   return (
     <div
       className={`
@@ -12,6 +13,7 @@ const IndustryCard = ({ title }: Props) => {
       `}
     >
       {title}
+      <div>{children}</div>
     </div>
   );
 };
