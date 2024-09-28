@@ -29,4 +29,4 @@ interface CompaniesResponse {
   total: number;
 }
 
-export type { CompaniesResponse };
+export type { CompaniesResponse, Company };
