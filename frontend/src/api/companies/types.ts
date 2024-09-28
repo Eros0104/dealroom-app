@@ -14,7 +14,7 @@ interface Industry {
   name: string;
 }
 
-interface CompanyResponse {
+interface Company {
   uuid: string;
   images: CompanyImages;
   incomeStreams: IncomeStream[];
@@ -24,4 +24,9 @@ interface CompanyResponse {
   totalJobsAvailable: number;
 }
 
-export type { CompanyResponse };
+interface CompaniesResponse {
+  items: Company[];
+  total: number;
+}
+
+export type { CompaniesResponse };
