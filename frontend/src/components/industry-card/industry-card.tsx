@@ -19,13 +19,13 @@ const IndustryCard = ({ title, children, totalJobs }: Props) => {
           flex items-center justify-between
       `}
       >
-        <span>{title}</span>
-        <span className={`text-gray-500`}>{totalJobs}</span>
+        <span className={`font-semibold`}>{title}</span>
+        <span className={`text-neutral-500 font-semibold`}>{totalJobs}</span>
       </div>
       <div
         className={`
           flex items-center justify-between
-          text-sm text-gray-400
+          text-xs text-neutral-500
           border-b
           pb-2
         `}

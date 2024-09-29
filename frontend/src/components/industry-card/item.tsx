@@ -19,7 +19,8 @@ const IndustryCardItem = ({ totalJobsAvailable, name, imageUrl }: Props) => {
   return (
     <div
       className={`
-      flex flex-row gap-2 items-center
+        flex flex-row gap-2 items-center
+        text-sm font
     `}
     >
       <div>
@@ -40,7 +41,7 @@ const IndustryCardItem = ({ totalJobsAvailable, name, imageUrl }: Props) => {
       >
         {name}
       </div>
-      <div>{totalJobsAvailable}</div>
+      <div className="text-neutral-500">{totalJobsAvailable}</div>
     </div>
   );
 };
