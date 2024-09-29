@@ -13,6 +13,9 @@ const Home = () => {
         index === self.findIndex((t) => t.uuid === company.uuid),
     );
 
+    // Sort companies by name
+    filteredDuplicates.sort((a, b) => a.name.localeCompare(b.name));
+
     // Group companies by industries
     return filteredDuplicates.reduce(
       (acc, company) => {
