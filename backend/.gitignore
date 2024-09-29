@@ -1,8 +1,0 @@
-# dependencies dirs
-/node_modules
-
-# env
-.env
-
-# build
-/dist
