@@ -1,6 +1,7 @@
 import { useGetCompaniesQuery } from "@/api/companies";
 import { Company } from "@/api/companies/types";
 import { Container, IndustryCard, IndustryCardItem } from "@/components";
+import { capitalizeWords } from "@/utils/string-helper";
 import { useMemo } from "react";
 
 const Home = () => {
@@ -49,7 +50,11 @@ const Home = () => {
         >
           {Object.entries(companiesGroups).map(
             ([group, { companies, totalJobs }]) => (
-              <IndustryCard key={group} title={group} totalJobs={totalJobs}>
+              <IndustryCard
+                key={group}
+                title={capitalizeWords(group)}
+                totalJobs={totalJobs}
+              >
                 {companies.map((company) => (
                   <IndustryCardItem
                     key={company.uuid}
