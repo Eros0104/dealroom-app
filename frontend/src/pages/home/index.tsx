@@ -29,6 +29,11 @@ const Home = () => {
     );
   }, [companies.items]);
 
+  const totalJobsAvailable = companies.items.reduce(
+    (acc, company) => acc + company.totalJobsAvailable,
+    0,
+  );
+
   return (
     <div
       className={`
@@ -43,13 +48,17 @@ const Home = () => {
           `}
         >
           {Object.entries(companiesGroups).map(([group, companies]) => (
-            <IndustryCard key={group} title={group}>
+            <IndustryCard
+              key={group}
+              title={group}
+              totalJobs={totalJobsAvailable}
+            >
               {companies.map((company) => (
                 <IndustryCardItem
                   key={company.uuid}
                   name={company.name}
                   totalJobsAvailable={company.totalJobsAvailable}
-                  imageUrl={""}
+                  imageUrl={company.images["32x32"]}
                 />
               ))}
             </IndustryCard>
