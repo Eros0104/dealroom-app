@@ -1,4 +1,6 @@
 # Dealroom App
+[![API Netlify Status](https://api.netlify.com/api/v1/badges/ec8dd055-9615-4cac-8c24-ae66800c2368/deploy-status)](https://app.netlify.com/sites/eros-assessment-api/deploys)
+[![Frontend Netlify Status](https://api.netlify.com/api/v1/badges/63530fea-12b1-4be6-9c55-3da8d4bb3651/deploy-status)](https://app.netlify.com/sites/eros-assessment/deploys)
 
 ## Installation
 
