@@ -8,34 +8,31 @@ const Home = () => {
 
   const companiesGroups = useMemo(() => {
     // Remove duplicate companies
-    const filteredDuplicates = companies.items.filter(
+    const uniqueCompanies = companies.items.filter(
       (company, index, self) =>
         index === self.findIndex((t) => t.uuid === company.uuid),
     );
 
     // Sort companies by name
-    filteredDuplicates.sort((a, b) => a.name.localeCompare(b.name));
+    uniqueCompanies.sort((a, b) => a.name.localeCompare(b.name));
 
     // Group companies by industries
-    return filteredDuplicates.reduce(
+    return uniqueCompanies.reduce(
       (acc, company) => {
         company.industries.forEach((industry) => {
           if (!acc[industry.name]) {
-            acc[industry.name] = [];
+            acc[industry.name] = { companies: [], totalJobs: 0 };
           }
-          acc[industry.name].push(company);
+
+          acc[industry.name].companies.push(company);
+          acc[industry.name].totalJobs += company.totalJobsAvailable;
         });
 
         return acc;
       },
-      {} as Record<string, Company[]>,
+      {} as Record<string, { companies: Company[]; totalJobs: number }>,
     );
   }, [companies.items]);
-
-  const totalJobsAvailable = companies.items.reduce(
-    (acc, company) => acc + company.totalJobsAvailable,
-    0,
-  );
 
   return (
     <div
@@ -50,22 +47,20 @@ const Home = () => {
             py-4
           `}
         >
-          {Object.entries(companiesGroups).map(([group, companies]) => (
-            <IndustryCard
-              key={group}
-              title={group}
-              totalJobs={totalJobsAvailable}
-            >
-              {companies.map((company) => (
-                <IndustryCardItem
-                  key={company.uuid}
-                  name={company.name}
-                  totalJobsAvailable={company.totalJobsAvailable}
-                  imageUrl={company.images["32x32"]}
-                />
-              ))}
-            </IndustryCard>
-          ))}
+          {Object.entries(companiesGroups).map(
+            ([group, { companies, totalJobs }]) => (
+              <IndustryCard key={group} title={group} totalJobs={totalJobs}>
+                {companies.map((company) => (
+                  <IndustryCardItem
+                    key={company.uuid}
+                    name={company.name}
+                    totalJobsAvailable={company.totalJobsAvailable}
+                    imageUrl={company.images["32x32"]}
+                  />
+                ))}
+              </IndustryCard>
+            ),
+          )}
         </div>
       </Container>
     </div>
