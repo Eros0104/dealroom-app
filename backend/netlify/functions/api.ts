@@ -1,11 +1,8 @@
 import express, { Router } from "express";
 import serverless from "serverless-http";
+import router from "../../src/routes";
 
 const api = express();
-
-const router = Router();
-// @ts-ignore
-router.get("/hello", (req, res) => res.send("Hello World!"));
 
 api.use("/api/", router);
 
