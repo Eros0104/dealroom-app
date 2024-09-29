@@ -6,7 +6,8 @@ const companyController = {
   getCompanies: async (req: Request, res: Response) => {
     const json = JSON.stringify(data);
     const result = jsonParser.parse(json);
-    res.json(result);
+
+    res.status(200).header("Access-Control-Allow-Origin", "*").json(result);
   },
 };
 
