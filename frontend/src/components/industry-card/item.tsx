@@ -28,6 +28,7 @@ const IndustryCardItem = ({ totalJobsAvailable, name, imageUrl }: Props) => {
           className="rounded-sm"
           alt={`${name} logo`}
           width={24}
+          height={24}
           loading="lazy"
           onError={fallbackImageCalled ? undefined : handleImageError}
         />
