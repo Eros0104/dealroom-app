@@ -36,11 +36,7 @@ const Home = () => {
   }, [companies.items]);
 
   return (
-    <div
-      className={`
-        bg-gray-100 min-h-lvh
-      `}
-    >
+    <div>
       <Container>
         <div
           className={`
