@@ -1,11 +1,21 @@
 import { useGetCompaniesQuery } from "@/api/companies";
 import { Company } from "@/api/companies/types";
-import { Container, IndustryCard, IndustryCardItem } from "@/components";
+import {
+  Container,
+  IndustryCard,
+  IndustryCardItem,
+  SearchInput,
+} from "@/components";
 import { capitalizeWords } from "@/utils/string-helper";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 const Home = () => {
-  const { data: companies = { items: [] } } = useGetCompaniesQuery();
+  const [searchInput, setSearchInput] = useState("");
+  const { data: companies = { items: [] } } = useGetCompaniesQuery(searchInput);
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.currentTarget.value);
+  };
 
   const companiesGroups = useMemo(() => {
     // Remove duplicate companies
@@ -38,6 +48,9 @@ const Home = () => {
   return (
     <div>
       <Container>
+        <div>
+          <SearchInput value={searchInput} onChange={handleInput} />
+        </div>
         <div
           className={`
             grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3
